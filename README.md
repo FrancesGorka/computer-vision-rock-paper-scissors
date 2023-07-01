@@ -13,17 +13,17 @@ Rock-Paper-Scissors is a game in which each player simultaneously shows one of t
 - 
 ## Training the model
 
-- I used "Teachable Machine" to train a machine learning model built with Keras (keras_model.h5). 
+- I used "Teachable Machine" to train a machine learning model built with Keras (keras_model.h5). It's not likely to be particularly accurate as I only trained it with ~200 images for each class.
 
 ## RPS-Template: Running the model
 
-- This file runs the pre-trained model. The model is loaded and then the camera is initialised. 
+This file contains a function camera_prediction() which runs the pre-trained model and returns the prediction: 
+- The model is loaded and then the camera is initialised. 
 - A numpy array is created of shape (1, 224, 224, 3) which corresponds to a single image with height 224, width 224, and 3 channels (RGB). 
-- The while loop runs indefinitely until broken by the key command 'q' (once the user has provided input via the camera)
-- The frame image is read, resized, normalised and stored in the empty numpy array.
+- The frame image is repeatedly read, resized, normalised and stored in the empty numpy array. This stops after 10s.
 - The model then creates a prediction based on the values in the numpy array. This is a probability vector for how likely it is the captured image is scissors, paper and rock respectively.
 
-## Creating the game
+## Creating the manual game
 
 This file defines three functions:
 - one function creates a variable for the computer's choice between rock, paper and scissors. This is chosen randomly
@@ -33,3 +33,12 @@ This file defines three functions:
 The final function is called within the file.
 
 ![Screenshot from 2023-06-30 22-50-16.png](/home/frances/Pictures/Screenshot from 2023-06-30 22-50-16.png)
+
+## Creating the camera input game
+
+- This file creates a version of the manual input game whereby the user inputs their choice. In this case, the choice is identified by the webcam.
+- The function get_prediction imports and calls the camera_prediction from RPS_Template, which uses a computer vision model to create a probability vector corresponding to choices of scissors, paper and rock
+- the maximum value (most likely option) in this probability vector becomes the user's choice. The computer choice is random.
+- The get_winner function finds the winner according to the combination of computer and user choice.
+- The play() function uses the aforementioned three functions to create a game, returning the winner.
+- best_of_three tracks winners and stops the game when either the user or computer reaches 3 wins.
