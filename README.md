@@ -13,4 +13,23 @@ Rock-Paper-Scissors is a game in which each player simultaneously shows one of t
 - 
 ## Training the model
 
-- I used "Teachable Machine" to train a machine learning model built with Keras (keras_model.h5).
+- I used "Teachable Machine" to train a machine learning model built with Keras (keras_model.h5). 
+
+## RPS-Template: Running the model
+
+- This file runs the pre-trained model. The model is loaded and then the camera is initialised. 
+- A numpy array is created of shape (1, 224, 224, 3) which corresponds to a single image with height 224, width 224, and 3 channels (RGB). 
+- The while loop runs indefinitely until broken by the key command 'q' (once the user has provided input via the camera)
+- The frame image is read, resized, normalised and stored in the empty numpy array.
+- The model then creates a prediction based on the values in the numpy array. This is a probability vector for how likely it is the captured image is scissors, paper and rock respectively.
+
+## Creating the game
+
+This file defines three functions:
+- one function creates a variable for the computer's choice between rock, paper and scissors. This is chosen randomly
+- one function creates a variable for the user's choice. This is dependent upon user input. Currently there are no error messages for incorrect input.
+- The final function calls both of these functions and then uses if/elif/else statements to articulate a winner and print win/loss messages
+
+The final function is called within the file.
+
+![Screenshot from 2023-06-30 22-50-16.png](/home/frances/Pictures/Screenshot from 2023-06-30 22-50-16.png)
